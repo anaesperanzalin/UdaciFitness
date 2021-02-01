@@ -1,17 +1,30 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { getMetricMetaInfo } from '../utils/helpers'
-//import { Value } from 'react-native-reanimated'
+import { View , Text, TouchableOpacity } from 'react-native'
+import { getMetricMetaInfo, timeToString } from '../utils/helpers'
+import {Ionicons} from '@expo/vector-icons'
 
 import UdaciSlider from "./UdaciSlider"
 import UdaciSteppers from "./UdaciSteppers"
+import DateHeader from "./dateheader"
+import TextButton from "./textbutton"
 
+
+
+function SubmitBn ({onPress}) {
+    return(
+        <TouchableOpacity
+        onPress ={onPress }>
+            <Text>SUBMIT</Text>
+        </TouchableOpacity>
+
+    )
+}
 
 export default class AddEntry extends Component {
     
     state ={
-    run: 0,
-    bike: 0,
+    run: 50,
+    bike: 10,
     swim: 0,
     sleep: 0, 
     eat: 0,
@@ -49,19 +62,56 @@ export default class AddEntry extends Component {
             [metric]: value, 
         }))
 
+    }
+
+    submit = () => {
+        const key = timeToString()
+        const entry = this.state
+
+        this.setState( ()=> ({
+            run: 0,
+            bike: 0,
+            swim: 0,
+            sleep: 0,
+            eat: 0
+
+        }))
+
+    }
+
+    reset = () => {
+        const key = timetoString();
 
     }
 
 
+
+
     render() {
         const metaInfo = getMetricMetaInfo()
-
-
-
+        
+       
+        if(true) {
+                return (
+                <View>
+                    <Ionicons 
+                    name = 'ios-happy-outline'
+                    size ={100}
+                    />
+                    <Text>You already logged your information for today  </Text>
+                    <TextButton onPress = {this.reset}> Reset </TextButton>    
+                </View>
+                )}
+        
         return (
             <View>
-
-            {/* {getMetricMetaInfo('bike').getIcon()} */}
+            <Text> {"\n"}</Text>
+            <Text> {"\n"}</Text>
+            <DateHeader date= {(new Date()).toLocaleDateString()}/>
+            <Text> {"\n"}</Text>
+            <Text> Hi ~ {"\n"}</Text>
+            <Text>{JSON.stringify(this.state)}</Text>
+            
             {Object.keys(metaInfo).map( 
                 
                 (key) => {
@@ -70,9 +120,10 @@ export default class AddEntry extends Component {
                 
             
                 return(
+                    
                     <View key={key}>
                         {getIcon()}
-                        {type === "slider"}
+                        {type === "slider"
                         ? <UdaciSlider
                         value = {value}
                         onChange = {(value)=> this.slide(key, value)}
@@ -93,6 +144,9 @@ export default class AddEntry extends Component {
                 }
                 )
                 }
+            <SubmitBn onPress = {this.submit}/>
+                
+    
 
             </View>
         )
@@ -101,3 +155,5 @@ export default class AddEntry extends Component {
     
 
 }
+
+
