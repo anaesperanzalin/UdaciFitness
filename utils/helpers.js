@@ -157,4 +157,7 @@ export function isBetween (num, x, y) {
 
 
 
+export function getDailyReminderValue (){
+  today: "👋 don't forget to log your data today"
 
+}
