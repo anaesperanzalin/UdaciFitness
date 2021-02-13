@@ -134,10 +134,7 @@ class AddEntry extends Component {
         return (
             <View>
             <Text> {"\n"}</Text>
-            <Text> {"\n"}</Text>
             <DateHeader date= {(new Date()).toLocaleDateString()}/>
-            <Text> {"\n"}</Text>
-            <Text> Hi ~ {"\n"}</Text>
             <Text>{JSON.stringify(this.state)}</Text>
             
             {Object.keys(metaInfo).map( 
