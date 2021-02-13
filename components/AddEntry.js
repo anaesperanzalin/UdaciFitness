@@ -11,12 +11,13 @@ import DateHeader from "./dateheader"
 import TextButton from "./textbutton"
 
 import { submitEntry, removeEntry} from "./api"
+import { purple } from '../utils/colors'
 
 function SubmitBn ({onPress}) {
     return(
         <TouchableOpacity
         onPress ={onPress }>
-            <Text>SUBMIT</Text>
+            <Text style={{color: purple, fontSize:25}}>SUBMIT</Text>
         </TouchableOpacity>
 
     )

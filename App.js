@@ -6,6 +6,32 @@ import AddEntry from "./components/AddEntry"
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import reducer from './components/reducers'
+import {purple, white } from './utils/colors'
+import { FontAwesome , Ionicons} from '@expo/vector-icons'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+
+
+function Home(){
+  return (
+    <View style= {styles.container}>
+      <Text>HOME </Text>
+
+    </View>
+  )
+}
+
+function Dashboard (){
+  return (
+    <View style = {styles.container}>
+      <Text> Dashboard </Text>
+
+    </View>
+  )
+}
+
+const Tab = createBottomTabNavigator();
+
 
 
 
@@ -13,11 +39,18 @@ export default class App extends React.Component {
   render(){
     return (
       <Provider store ={createStore(reducer)}>
-      <View style = {styles.container}>
+        <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name= "Home" component= {Home}/>
+          <Tab.Screen name= "Dashboard" component = {Dashboard}/>
+        </Tab.Navigator>
+
+        </NavigationContainer>
+
+      {/* <View style = {styles.container}>
 
         <AddEntry/>
-
-      </View>
+      </View> */}
       </Provider>
     )
   }  
@@ -30,5 +63,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
 });
